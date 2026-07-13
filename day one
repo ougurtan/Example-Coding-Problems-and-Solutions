@@ -1,0 +1,19 @@
+Problem: Warehouse Pair Scan
+Amazon's warehouse robots scan packages on a conveyor belt. Each package has an integer weight. A shipping container can hold exactly two packages, and it seals correctly only if the two weights sum to a multiple of k.
+Given an array weights of n integers and an integer k, return the number of distinct pairs of indices (i, j) with i < j such that weights[i] + weights[j] is divisible by k.
+Example 1:
+Input: weights = [1, 2, 3, 4, 5], k = 3
+Output: 4
+Explanation: valid pairs are (1,2)→3, (1,5)→6, (2,4)→6, (4,5)→9
+Example 2:
+Input: weights = [6, 3, 9], k = 3
+Output: 3
+Explanation: every pair sums to a multiple of 3
+Example 3:
+Input: weights = [1, 1], k = 5
+Output: 0
+Constraints:
+
+2 <= n <= 10^5
+1 <= weights[i] <= 10^9
+1 <= k <= 100
