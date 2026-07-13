@@ -1,0 +1,44 @@
+Topic: Arrays & Hashing I
+Difficulty level: 4/10
+
+At first glance this problem might seem like a casual 2-3/10 difficulty. Some of you might've written the following answer:
+int count = 0;
+for (int i = 0; i < n; i++) {
+    for (int j = i + 1; j < n; j++) { // j starts at i + 1 to prevent doubles --(1,2) and (2,1) for example,-- and the first weight being packaged with itself
+        if ((weights[i] + weights[j]) % k == 0) {
+            count++;
+        }
+    }
+}
+return count;
+
+While this code will compile correctly, there is a problem. The big-O of this solution is n^2 which lands us at 10^10 operations as n can be anywhere up to 10^5. 
+
+Pro Tip: Your solutions can run for 1-2 seconds which is generally 10^8 operations.
+
+Let's take a look at the optimal solution now.
+
+
+long long countPairs(vector<int>& weights, int k) {
+    
+    vector<long long> remainder_counts(k, 0);// Track how many times each remainder
+    long long count = 0;
+    
+    for (int weight : weights) {
+        int rem = weight % k;
+  
+        int complement = (k - rem) % k; // what remainder does it need to complete itself to k. In the case k=3 an example could be 4=>rem=1=>complement=2
+        
+        // If we've seen the complement before, add its frequency to our count
+        count += remainder_counts[complement]; // using the same example (see line 30) if we have seen 3 numbers with the remainder 2, than 4 is going to have 3 numbers that can match with it so far that'll have the sum that has 3 as a divisor
+
+        remainder_counts[rem]++;//for the next numbers remember that we have seen another number with this remainder
+    }
+    
+    return count;
+}
+
+
+This was it! Congratulations on completing your first day! Tomorrow we are going to continue Arrays & Hashing I. Now take that well-deserved break!
+
+
