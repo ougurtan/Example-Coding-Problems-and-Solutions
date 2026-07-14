@@ -1,0 +1,19 @@
+Problem: Frequency Twins
+A data-cleaning service receives a list of lowercase strings records. Two records are considered twins if one can be formed by rearranging the letters of the other (e.g., "listen" and "silent").
+Group all records into twin-groups, then return the size of the largest group.
+Example 1:
+Input: records = ["eat", "tea", "tan", "ate", "nat", "bat"]
+Output: 3
+Explanation: groups are {eat, tea, ate}, {tan, nat}, {bat} → largest has 3
+Example 2:
+Input: records = ["ab", "ba", "ab", "cd"]
+Output: 3
+Explanation: {ab, ba, ab} — duplicates count separately
+Example 3:
+Input: records = ["x"]
+Output: 1
+Constraints:
+
+1 <= records.length <= 10^4
+1 <= records[i].length <= 100
+All lowercase English letters
