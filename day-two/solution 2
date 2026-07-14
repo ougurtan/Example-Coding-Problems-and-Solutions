@@ -1,0 +1,39 @@
+Difficulty: 4/10 (easy medium)
+
+Hello everyone, congrats on making it to day 2 problem 2. Hopefully you're keeping that streak alive! 
+
+This problem has multiple possible answers, like any computer science problem. My first thought was using a multiset of chars with an int; the multiset will keep track of letters (a set would be faulty because it requires unique inputs) and the int marks how many times each is used.
+
+int twinsies(vector<string>& records) {
+    map<multiset<char>, int> inventory; // This is the map with a key.
+    int countMax = 0;// This is the max amount of the twin words that appeared. AKA what we will return.
+    for (const string& s : records) { 
+        multiset<char> key; 
+        for (char c : s) key.insert(c);//creating the key for each string in records
+        inventory[key]++; //C++ creates the items with int set to zero automatically, so we can just increment by one, and it'll be set to one.
+        countMax = max(countMax, inventory[key]);
+    }
+    return countMax;
+}
+
+Here's another possible answer:
+
+int twinsies(vector<string>& records) {
+    unordered_map<string, int> inventory;
+    int countMax = 0;
+
+    for (const string& s : records) {
+        string key = s; //the input must stay intact but the next line modifies so we have to make our own s
+        sort(key.begin(), key.end());//this is the "easy" way out. eat, ate, tea all becomes aet--alphabetical order
+        inventory[key]++;
+        countMax = max(countMax, inventory[key]);// if this group became the biggest with the addition update if not continue to hold the previous value
+    }
+
+    return countMax;
+}
+
+
+I'm sure you guys might find other awesome solutions! If your answer doesn't match any of these it doesn't necessarily mean it's incorrect. 
+
+Good job on completing day 2. See you tomorrow!
+
