@@ -1,0 +1,31 @@
+Difficulty:2/10
+Topic: Arrays & Hashing I
+
+#include <string>
+#include <vector>
+#include <unordered_map>
+
+using namespace std;
+
+string badgeStreak(vector<string>& swipes) {
+    unordered_map<string, int> all; //here we create an unordered map, all, to keep track of how many times we have seen the IDs.
+    int countMax = 0;//This will record the maximum number any ID has appeared.
+    string stMax = "";//This will record WHICH ID is the one that appeared the most.
+
+    for (const string& s : swipes) {
+        if (all.find(s) == all.end()) {
+            all[s] = 0; 
+        }// Initilize all ID's to zero. This code checks if s is in all, if not it initilizes to zero. C++ does this automatically, but because this course is about programming logic, it's important we mention this.
+        
+        
+        all[s]++; //Increment the count of the current ID.
+        
+        //Update max only if this current ID's count beats the previous max. Tip: If you did >= this would record the LATEST ID in a tie. 
+        if (all[s] > countMax) {
+            stMax = s;
+            countMax = all[s]; 
+        }
+    }
+
+    return stMax;
+}
