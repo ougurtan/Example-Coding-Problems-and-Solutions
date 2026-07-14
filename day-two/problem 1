@@ -1,0 +1,18 @@
+Problem: Badge Streak Audit
+A startup's office logs employee badge swipes as an array of strings swipes, where each element is an employee ID (e.g., "e102"). The security team wants to flag the ID that appears most frequently. If multiple IDs are tied for most frequent, return the one whose first swipe occurred earliest in the log.
+Return the flagged employee ID.
+Example 1:
+Input: swipes = ["e1", "e2", "e2", "e1", "e3", "e1"]
+Output: "e1"
+Explanation: e1 appears 3 times, e2 twice, e3 once.
+Example 2:
+Input: swipes = ["e7", "e4", "e4", "e7"]
+Output: "e7"
+Explanation: tie at 2 swipes each — e7's first swipe (index 0) is earlier than e4's (index 1).
+Example 3:
+Input: swipes = ["e9"]
+Output: "e9"
+Constraints:
+
+1 <= swipes.length <= 10^5
+Each ID is 1–10 characters, alphanumeric
