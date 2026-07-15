@@ -1,0 +1,20 @@
+Problem: Flash Sale Winner
+During a flash sale, a website logs every purchase as a stream of product IDs, in order. A product "goes viral" the moment its total purchase count reaches exactly t. Marketing wants to know which product went viral first — that is, during a single left-to-right scan of the log, which product is the first to have its counter hit t.
+Given an array of strings purchases and an integer t, return the ID of the first product to reach t purchases. If no product ever reaches t, return "" (empty string).
+Example 1:
+Input: purchases = ["p3", "p1", "p3", "p2", "p1", "p3"], t = 2
+Output: "p3"
+Explanation: counters as we scan: p3=1, p1=1, p3=2 ← p3 hits t=2 at index 2, before anyone else.
+Example 2:
+Input: purchases = ["a", "b", "b", "a"], t = 2
+Output: "b"
+Explanation: b reaches 2 at index 2; a doesn't reach 2 until index 3. 
+Note: a appeared FIRST in the log, but b reached the threshold first — not the same thing.
+Example 3:
+Input: purchases = ["x", "y", "z"], t = 2
+Output: ""
+Constraints:
+
+1 <= purchases.length <= 10^5
+1 <= t <= 10^5
+Product IDs are 1–10 alphanumeric characters
