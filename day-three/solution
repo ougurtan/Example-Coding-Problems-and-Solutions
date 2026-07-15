@@ -1,0 +1,9 @@
+string viral(vector<string>& purchases, int t) { //we used a vector because you can find its size without needing another variable; it's ok if you used an array with an int size though.
+    unordered_map<string, int> counter;  
+    for (const string& p : purchases) {
+        counter[p]++;
+        if (counter[p] == t)
+            return p;//Pro Tip: If you wanted to find the latest/latest purchased viral item, use a string variable, test if it equals to t inside the loop and update it every time something hits t or more.
+    }
+    return "";// if nobody reaches the if--so no viral products--return empty string
+}
