@@ -1,0 +1,25 @@
+Festival Wristbands
+You're organizing a music festival with n attendees standing in a line. Each attendee i has a wristband with a color code colors[i] (an integer).
+Security wants to verify the crowd using a rule: a contiguous group of attendees is called balanced if every color that appears in the group appears exactly k times.
+Given the array colors and an integer k, return the number of balanced contiguous groups (subarrays).
+Example 1:
+Input: colors = [1, 2, 1, 2], k = 2
+Output: 1
+Explanation: Only [1, 2, 1, 2] is balanced — both colors 1 and 2 appear exactly twice.
+Subarrays like [1, 2] are not balanced since each color appears once, not twice... 
+wait, k = 2 requires exactly 2 occurrences.
+Example 2:
+Input: colors = [3, 3, 5, 5, 3, 3], k = 2
+Output: 3
+Explanation: [3, 3], [5, 5], [3, 3] (the last two) are balanced.
+Note [3, 3, 5, 5] is also balanced → actually output is 5: 
+[3,3], [5,5], [3,3], [3,3,5,5], [5,5,3,3].
+Example 3:
+Input: colors = [1, 1, 1], k = 2
+Output: 2
+Explanation: [1, 1] starting at index 0 and index 1.
+Constraints:
+
+1 <= n <= 10^5
+1 <= colors[i] <= 10^9
+1 <= k <= n
