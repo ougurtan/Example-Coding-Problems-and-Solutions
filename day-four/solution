@@ -1,0 +1,59 @@
+Difficulty:5/10
+Topic:Arrays & Hashing I
+Hello everyone, and congratulations on making it to day four! I got some feedback about the questions being too easy, so I decided to take it up a notch this time. This question would be considered a medium difficulty in Leet Code. In Big Tech OAs expect around 40-50% of the questions being at this difficulty. 
+
+Also, I really appreciate the feedback and you guys' attention. If you have questions or suggested improvements you are more than welcome to reach out to me; I am not the best responder currently as I have a lot going on, but I will try and reply asap. Thanks again for being a part of this journey and without further ado here's the solution:)
+
+#include <vector>
+#include <unordered_map>
+using namespace std;
+
+int countBalancedSubarrays(vector<int>& colors, int k) {
+    int n = colors.size();
+    long long answer = 0; // we will be returning this value
+// A balanced subarray with m distinct colors has length m*k.
+// So we only test window lengths: k, 2k, 3k, ... up to n.
+    for (int len = k; len <= n; len += k) {   // iterate over each valid window length (multiple of k)
+        int m = len / k;// number of distinct colors this window MUST contain
+
+        unordered_map<int, int> count; // hash map: color -> occurrences inside current window
+        int exactK = 0;// how many colors currently appear EXACTLY k times
+        int distinct = 0;// how many distinct colors are in the window
+
+        for (int right = 0; right < n; right++) {   // 'right' is the index entering the window
+            int inColor = colors[right];            // the color being added
+
+            int before = count[inColor];            // its count before insertion (default-constructs to 0 if absent)
+            count[inColor] = before + 1;            // increment its count in the map
+
+            if (before == 0) distinct++;            // first occurrence -> one more distinct color
+            if (before + 1 == k) exactK++;          // count just reached k -> gained a "perfect" color
+            if (before == k) exactK--;              // count just passed k -> lost a "perfect" color
+
+            int left = right - len;                 // index that must LEAVE the window (if window full)
+            if (left >= 0) {                        // only remove once the window exceeds size 'len'
+                int outColor = colors[left];        // the color being removed
+
+                int prev = count[outColor];         // its count before removal
+                count[outColor] = prev - 1;         // decrement its count
+
+                if (prev == k) exactK--;            // was exactly k -> no longer perfect
+                if (prev - 1 == k) exactK++;        // dropped back down to k -> perfect again
+                if (prev - 1 == 0) {                // count hit zero
+                    count.erase(outColor);          // remove it from the map entirely
+                    distinct--;                     // one fewer distinct color
+                }
+            }
+
+            // Window is valid only when full-sized: indices [right-len+1 .. right]
+            if (right >= len - 1                    // window has reached full length 'len'
+                && distinct == m                    // it contains exactly m distinct colors
+                && exactK == m) {                   // and ALL m of them appear exactly k times
+                answer++;                           // -> this window is balanced, count it
+            }
+        }
+    }
+
+    return (int)answer;                             // total balanced subarrays found
+}
+}
